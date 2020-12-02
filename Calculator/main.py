@@ -3,10 +3,22 @@ gi.require_version("Gtk","3.0")
 
 from gi.repository import Gtk
 
-class panel (Gtk.Grid):
+class Caja(Gtk.Window):
     def __init__(self):
-        Gtk.Grid.__init__(self)
-        boton1=Gtk.Button(label="1")
+        Gtk.Window.__init__(self, title="Calculadora")
+        self.set_default_size(100, 100)
+        self.set_border_width(10)
+
+        pantalla=Gtk.Entry()
+        pantalla.set_text('0')
+        pantalla.set_alignment(1)
+        pantalla.set_can_focus(False)
+
+
+        teclado=Gtk.Grid()
+
+        teclado.set_row_spacing(5)
+        boton1 = Gtk.Button(label="1")
         boton2 = Gtk.Button(label="2")
         boton3 = Gtk.Button(label="3")
         boton4 = Gtk.Button(label="4")
@@ -24,11 +36,29 @@ class panel (Gtk.Grid):
         botonIgual = Gtk.Button(label="=")
         botonCe = Gtk.Button(label="CE")
 
+        teclado.attach(pantalla,0,0,5,1)
+        teclado.attach_next_to(boton7,pantalla,Gtk.PositionType.BOTTOM,1,1)
+        teclado.attach(boton8,1,1,1,1)
+        teclado.attach(boton9,2,1,1,1)
+        teclado.attach(botonCe,3,1,1,1)
+        teclado.attach_next_to(boton4,boton7,Gtk.PositionType.BOTTOM,1,1)
+        teclado.attach(boton5,1,2,1,1)
+        teclado.attach(boton6,2,2,1,1)
+        teclado.attach(botonDiv,3,2,1,1)
+        teclado.attach_next_to(boton1,boton4,Gtk.PositionType.BOTTOM,1,1)
+        teclado.attach(boton2, 1, 3, 1, 1)
+        teclado.attach(boton3, 2, 3, 1, 1)
+        teclado.attach(botonMult,3,3,1,1)
+        teclado.attach_next_to(boton0,boton1,Gtk.PositionType.BOTTOM,2,1)
+        teclado.attach(botonPunto,2,4,1,1)
+        teclado.attach(botonMen,3,4,1,1)
+        teclado.attach_next_to(botonIgual,boton0,Gtk.PositionType.BOTTOM,3,1)
+        teclado.attach(botonMas,3,5,1,1)
 
+        self.add(teclado)
 
-class Caja(Gtk.Window):
-    def __init__(self):
-
+        self.connect("destroy", Gtk.main_quit)
+        self.show_all()
 
 if __name__ == "__main__":
     Caja()
